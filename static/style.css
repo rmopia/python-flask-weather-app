@@ -1,8 +1,30 @@
 
 body{
     font-family: Roboto, sans-serif;
+    background: url("yosemite_0.jpg") no-repeat;
+    background-size: 1600px 900px;
 }
 
-col{
-    background-color:#fff1a6 ;
+
+h3{
+    text-align: center;
+}
+
+p{
+    text-align: left;
+}
+
+.col{
+    background-color: #eeeded;
+    border-radius: 15px 50px;
+    height: 250px;
+    padding: 10px;
+}
+
+.row{
+    padding:30px;
+}
+
+.jumbotron{
+    background-color: #eeeded;
 }

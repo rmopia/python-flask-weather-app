@@ -1,5 +1,7 @@
 import requests
 import datetime
+import numpy as np
+import calendar
 import os
 import json
 
@@ -28,22 +30,25 @@ fiveday = requests.get('http://api.openweathermap.org/data/2.5/forecast?lat=' + 
 
 kelvin_list = []
 fa_list = []
-# print(fiveday)
+#print(fiveday)
 # for item in fiveday['list']:
 #    kelvin_list.append(item)
 # print(fiveday['list'][2])
 # print(fiveday['list'][39]['main']['temp'])
 
 for i in range(40):
-    kelvin_list.append(fiveday['list'][i]['main']['temp'])
+    temp_tuple = (fiveday['list'][i]['main']['temp'], fiveday['list'][i]['main']['temp_min'], fiveday['list'][i]['main']['temp_max'])
+    kelvin_list.append(temp_tuple)
 
 print(kelvin_list)
 
-for item in kelvin_list:
-    new_item = round((float(item) - 273.15) * (9 / 5) + 32)
+for tup in kelvin_list:
+    new_item = tuple(np.round(np.add(np.multiply(np.subtract(tup, 273.15), 9/5), 32)))
+    #new_item = round((float(tup) - 273.15) * (9 / 5) + 32)
     fa_list.append(new_item)
 
-print(fa_list)
+
+print("fa list: " + str(fa_list))
 
 day1_forecast = []
 day2_forecast = []
@@ -93,11 +98,39 @@ def determine_weather(hour, forecast):
     if hour == 12 or hour == 13 or hour == 14:
         print(forecast[4])
     if hour == 15 or hour == 16 or hour == 17:
-        print(forecast[5])
+        print(forecast[5][0])
     if hour == 18 or hour == 19 or hour == 20:
-        print(forecast[6])
+        print(forecast[6][0])
     if hour == 21 or hour == 22 or hour == 23:
         print(forecast[7])
 
 
+def avg_temp(forecast):  # use for days 2,3,4 and 5
+    triples_list = []
+    for triples in forecast:
+        triples_list.append(int(triples[0]))
+    length = len(triples_list)
+    triples_sum = sum(triples_list)
+    avg = round(triples_sum/length)
+    return avg
+
+
+def forecast_days():
+    today = datetime.datetime.now().weekday()
+    our_days = []
+
+    for n in range(today, today + 5):
+        day = n % 7
+        calender_day = calendar.day_name[day]
+        our_days.append(calender_day)
+
+    print(our_days)
+
+
 determine_weather(cur_hour, day1_forecast)
+navg = avg_temp(day2_forecast)
+# print(navg)
+forecast_days()
+
+time = datetime.datetime.now().time()
+print(time)

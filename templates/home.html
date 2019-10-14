@@ -18,28 +18,65 @@
 <body>
     <div class="jumbotron text-center">
         <h1>
-            Weather
+            Weather Report
         </h1>
         <h5>
-            Greetings to {{ ip }}! Here's the weather in your area
+            Greetings to {{ ip }}! Here's the weather in {{ info['city'] }}, {{ info['region'] }}, {{ info['country_code3'] }}
+        </h5>
+        <h5>
+            {{ time_now }}
         </h5>
     </div>
     <div class="container">
         <div class="row">
             <div class="col">
-                1
+                <h3>
+                    {{ days_list[0] }}
+                </h3>
+                    Current Temp:
+                <h1>
+                    {{ day1[0] }}
+                </h1>
+                <div class="text-center">
+                    Low: {{ day1[1] }}
+                    High: {{ day1[2] }}
+                </div>
             </div>
             <div class="col">
-                2
+                <h3>
+                    {{ days_list[1] }}
+                </h3>
+                    Average Temp:
+                <h1>
+                    {{ avg_day2 }}
+                </h1>
             </div>
             <div class="col">
-                3
+                <h3>
+                    {{ days_list[2] }}
+                </h3>
+                    Average Temp:
+                <h1>
+                    {{ avg_day3 }}
+                </h1>
             </div>
             <div class="col">
-                4
+                <h3>
+                    {{ days_list[3] }}
+                </h3>
+                Average Temp:
+                <h1>
+                    {{ avg_day4 }}
+                </h1>
             </div>
             <div class="col">
-                5
+                <h3>
+                    {{ days_list[4] }}
+                </h3>
+                    Average Temp:
+                <h1>
+                    {{ avg_day5 }}
+                </h1>
             </div>
         </div>
     </div>
